@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import './App.scss';
+import Home from './page/Home';
+import { actionCreators,State } from "./state/index";
 
 function App() {
+  const dispatch = useDispatch()
+  const {fetchRobosData} = bindActionCreators(actionCreators,dispatch)
+
+  useEffect(()=>{
+    fetchRobosData()
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home/>
     </div>
   );
 }

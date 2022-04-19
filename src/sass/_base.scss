@@ -1,0 +1,39 @@
+html{
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+a,a:hover,a:visited{
+    text-decoration: none;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.4;
+    font-size: 1rem;
+}
+
+img{
+    display: block;
+    max-width: 100%;
+}
+
+// 1440px, 1290px
+.wrapper{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+.container{
+    max-width: 1210px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin: 0 auto;
+}
