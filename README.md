@@ -18,4 +18,4 @@ View list robo.\
 
 Project demo for tutorial.\
 Author: Nguyễn Quang Huy.\
-I'm a internship at Alta Software.
+I'm a internship at Alta Software.\
