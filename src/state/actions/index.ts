@@ -1,11 +1,19 @@
 import { ActionTypes } from "../action-types";
 
-enum Gender{
-    "female",
-    "male"
+export enum Gender{
+    FEMALE = "female",
+    MALE = "male"
 }
 
 export interface Robo{
+    id: string,
+    name: String,
+    gender: Gender,
+    image: String,
+    dame: Number,
+    hp:Number
+}
+export interface RoboCreate{
     name: String,
     gender: Gender,
     image: String,
@@ -14,7 +22,8 @@ export interface Robo{
 }
 
 export interface RoboUpdate{
-    name: String,
+    id: string,
+    name?: String,
     gender?: Gender,
     image?: String,
     dame?: Number,

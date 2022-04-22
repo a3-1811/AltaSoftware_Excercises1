@@ -1,7 +1,8 @@
 import { Dispatch } from "redux";
+import RobosApi from "../../API/robosApi";
 import RobosAPI from "../../API/robosApi";
 import { ActionTypes } from "../action-types";
-import { Action, Robo, RoboUpdate } from "../actions";
+import { Action, Robo, RoboCreate, RoboUpdate } from "../actions";
 
 //Fetch data to store
 export const fetchRobosData = ()=>{
@@ -11,11 +12,11 @@ export const fetchRobosData = ()=>{
             let robos : Robo[] = []
             let nameKeys = Object.keys(res)
             
-            nameKeys.forEach((name : string)=>{
+            nameKeys.forEach((id : string)=>{
                 let obj = {
-                    ...res[name as any]
+                    ...res[id as any]
                 }
-                obj.name = name
+                obj.id = id
                 robos.push(obj)
             })
             dispatch({
@@ -27,27 +28,42 @@ export const fetchRobosData = ()=>{
     }
 }
 
-export const addRobo = (robo: Robo)=>{
+export const addRobo = (roboCreate: RoboCreate)=>{
     return (dispatch : Dispatch<Action>)=>{
-        dispatch({
-            type: ActionTypes.ADD_ROBO,
-            payload: robo
-        })
+      RobosApi.addRobo(roboCreate).then((data) => {
+        let robo : Robo = {
+            id: data.name,
+            ...roboCreate
+        }
+          dispatch({
+              type: ActionTypes.ADD_ROBO,
+              payload: robo
+          })
+      })
     }
 }
-export const removeRobo = (roboName : string)=>{
+export const removeRobo = (id : string)=>{
     return (dispatch : Dispatch<Action>)=>{
-        dispatch({
-            type: ActionTypes.DELETE_ROBO,
-            payload: roboName
+        //Goi api xoa robo
+        RobosApi.deleteRobo(id).then((res)=>{
+            dispatch({
+                type: ActionTypes.DELETE_ROBO,
+                payload: id
+            })
         })
+        .catch(err=>console.log)
     }
 }
 export const updateRobo = (robo: RoboUpdate)=>{
     return (dispatch : Dispatch<Action>)=>{
-        dispatch({
-            type: ActionTypes.UPDATE_ROBO,
-            payload: robo
+        RobosAPI.updateRobo(robo)
+        .then((res)=>{
+            let roboUpdate :RoboUpdate = {...res}
+            dispatch({
+                type: ActionTypes.UPDATE_ROBO,
+                payload: roboUpdate
+            })
         })
+      
     }
 }

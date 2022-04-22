@@ -1,7 +1,11 @@
-import { Robo, RoboUpdate } from "../state/actions"
+import { Robo, RoboCreate, RoboUpdate } from "../state/actions"
 import axiosClient from "./axiosClient"
 
-const baseUri = 'https://dummy-robots-default-rtdb.asia-southeast1.firebasedatabase.app/robos'
+const baseUri =""
+
+interface RoboCreateResponse {
+    name : string
+}
 
 const RobosApi = {
     getListRobos(){
@@ -12,16 +16,16 @@ const RobosApi = {
         const url =baseUri + `/${roboName}.json`
         return axiosClient.get<Robo>(url)
     },
-    addRobo(robo :Robo){
+    addRobo(robo :RoboCreate){
         const url =baseUri+ ".json"
-        return axiosClient.put(url,robo)
+        return axiosClient.post<RoboCreateResponse,RoboCreateResponse>(url,robo)
     },
     updateRobo(roboUpdate: RoboUpdate){
-        const url =baseUri+`/${roboUpdate.name}.json`
-        return axiosClient.patch(url,roboUpdate)
+        const url =baseUri+`/${roboUpdate.id}.json`
+        return axiosClient.patch<RoboUpdate,RoboUpdate>(url,roboUpdate)
     },
-    deleteRobo(roboName: string){
-        const url =baseUri+`/${roboName}.json`
+    deleteRobo(id: string){
+        const url =baseUri+`/${id}.json`
         return axiosClient.delete(url)
     },
 

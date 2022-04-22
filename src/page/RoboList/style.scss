@@ -1,0 +1,23 @@
+.robos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-create{
+    cursor: pointer;
+    color: #fff;  
+    outline: none;
+    border: 0;
+    padding: 1rem 1.5rem;
+    background: green;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
